@@ -2,10 +2,30 @@
 //
 
 #include <iostream>
+#include "Algorithms.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    char* input = (char*)malloc(sizeof(char) * 100);
+    while (true)
+    {
+        std::cout << "Enter a number or type \"cancel\" to stop the program without memory leaks\n";
+        _Notnull_ std::cin >> input;
+        std::cout << "\n";
+        if (!std::strcmp(input, "cancel"))
+            break;
+        try
+        {
+            std::string integerResult = std::to_string(Algorithms::atoi(input));
+            std::cout << "Parsed number: " + integerResult + "\n";
+        }
+        catch (const std::string& err)
+        {
+            std::cout << "Error while parsing the number";
+        }
+        std::cout << "\n\n";
+    }
+    free(input);
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
